@@ -1,19 +1,20 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
-
+import 'package:dio/dio.dart';
 import '../app_exception.dart';
 import 'base_api_service.dart';
 
 class NetworkApiService extends BaseApiService {
+  final dio = Dio();
+
   @override
   Future<dynamic> getResponse(
     String url,
   ) async {
     dynamic responseJson;
     try {
-      final response = await http
-          .get(Uri.parse(baseUrl + url), headers: header)
+      final response = await dio
+          .get(baseUrl + url, options: Options(headers: header))
           .timeout(const Duration(seconds: 10));
       responseJson = returnResponse(response);
     } on SocketException {
@@ -26,8 +27,9 @@ class NetworkApiService extends BaseApiService {
   Future<dynamic> postResponse(String url, dynamic jsonBody) async {
     dynamic responseJson;
     try {
-      final response = await http
-          .post(Uri.parse(baseUrl + url), body: jsonBody, headers: header)
+      final response = await dio
+          .post(baseUrl + url,
+              data: jsonBody, options: Options(headers: header))
           .timeout(
             const Duration(seconds: 10),
           );
@@ -38,8 +40,8 @@ class NetworkApiService extends BaseApiService {
     return responseJson;
   }
 
-  dynamic returnResponse(http.Response response) {
-    dynamic responseJson = jsonDecode(response.body);
+  dynamic returnResponse(Response response) {
+    dynamic responseJson = response.data;
     switch (response.statusCode) {
       case 200:
       case 201:

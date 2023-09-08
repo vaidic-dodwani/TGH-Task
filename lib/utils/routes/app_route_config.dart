@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../view/screens/temp_screen/temp_screen.dart';
+import 'package:tgh_task/view/screens/homescreen/homescreen.dart';
 import 'app_route_names.dart';
 
 class GoRouterConfig {
@@ -11,7 +10,7 @@ class GoRouterConfig {
         name: AppRouteNames.splashScreenRoute,
         path: '/',
         pageBuilder: (context, state) {
-          return const MaterialPage(child: SplashScreen());
+          return const MaterialPage(child: HomeScreen());
         },
       ),
     ],

@@ -24,7 +24,7 @@ class LanguageRepository extends _LanguageAbstract {
   @override
   Future<dynamic> translate(Map<String, dynamic> body) async {
     try {
-      final resp = await _apiService.postResponse(ApiLinks.detectUrl, body);
+      final resp = await _apiService.postResponse(ApiLinks.translateUrl, body);
       return resp;
     } on Exception catch (_) {
       rethrow;

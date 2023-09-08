@@ -1,4 +1,4 @@
 class ApiLinks {
   static const String detectUrl = "/languages";
-  static const String translateUrl = "translate/v2";
+  static const String translateUrl = "";
 }

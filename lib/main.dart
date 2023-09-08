@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'utils/provider/app_providers.dart';
 import 'utils/routes/app_route_config.dart';
 
@@ -17,11 +16,6 @@ class MyApp extends StatelessWidget {
       providers: AppProvider.providers,
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        theme: Theme.of(context).copyWith(
-          colorScheme: ColorScheme.fromSwatch(
-              // accentColor: AppColors.loginContainerColor,
-              ),
-        ),
         routerConfig: GoRouterConfig.router,
       ),
     );

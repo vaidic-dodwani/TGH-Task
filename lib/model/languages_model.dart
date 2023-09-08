@@ -1,22 +1,14 @@
+import 'package:tgh_task/view/shared/code_to_name_function.dart';
+
 class Language {
-  final String language;
-
+  final String shortLanguage;
+  final String longLanguage;
   Language({
-    required this.language,
+    required this.shortLanguage,
+    required this.longLanguage,
   });
-
-  Language copyWith({
-    String? language,
-  }) =>
-      Language(
-        language: language ?? this.language,
-      );
-
   factory Language.fromJson(Map<String, dynamic> json) => Language(
-        language: json["language"],
+        shortLanguage: json["language"],
+        longLanguage: codeToNameFunction(json["language"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "language": language,
-      };
 }

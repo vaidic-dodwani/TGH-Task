@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:tgh_task/view/screens/homescreen/widgets/country_button.dart';
 import 'package:tgh_task/view/screens/homescreen/widgets/translation_box.dart';
+import 'package:tgh_task/view_model/temp_view_model/languages_view_model.dart';
 import '../../shared/heading_text_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<LanguagesNotifier>(context, listen: false).getLanguages();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
