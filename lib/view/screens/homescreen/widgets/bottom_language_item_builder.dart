@@ -19,7 +19,7 @@ class BottomLanguageItemBuilder extends StatelessWidget {
             if (translationFlow == TranslationFlow.translateFrom) {
               prov.translateFromLanguage = prov.languages![index];
             } else {
-              prov.translateToLanguage = prov.languages![index + 1];
+              prov.translateToLanguage = prov.languages![index];
             }
             Navigator.pop(context);
           },
@@ -31,9 +31,7 @@ class BottomLanguageItemBuilder extends StatelessWidget {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Text(
-                  translationFlow == TranslationFlow.translateFrom
-                      ? prov.languages![index].longLanguage
-                      : prov.languages![index + 1].longLanguage,
+                  prov.languages![index].longLanguage,
                   style: AppTypography.raleway(
                       color: Colors.white70,
                       fontSize: 20,

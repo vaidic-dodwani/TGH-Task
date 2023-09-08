@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:tgh_task/model/languages_model.dart';
 import 'package:tgh_task/repository/languages_repository.dart';
-import 'package:tgh_task/utils/toast_functions.dart';
 
 import '../../view/shared/code_to_name_function.dart';
 
@@ -33,6 +32,16 @@ class LanguagesNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+//
+//
+  String _searchText = "";
+  String get searchText => _searchText;
+  set searchText(String _) {
+    _searchText = _;
+    notifyListeners();
+  }
+
+//
 //
   Language _translateFromLanguage =
       Language(shortLanguage: "detect", longLanguage: "Detect");
@@ -80,38 +89,38 @@ class LanguagesNotifier extends ChangeNotifier {
 
 //
   void translate() async {
-    _translationLoading = true;
+    // _translationLoading = true;
     notifyListeners();
-    Map<String, dynamic> body = {
-      'q': translateFromText,
-      'target': translateToLanguage.shortLanguage
-    };
+    // Map<String, dynamic> body = {
+    //   'q': translateFromText,
+    //   'target': translateToLanguage.shortLanguage
+    // };
 
-    try {
-      if (translateToLanguage.shortLanguage == "select") {
-        translateToText = "Select a Language First";
-        _translationLoading = false;
-        notifyListeners();
-        return;
-      }
-      final output = await languageRepo.translate(body);
-      translateToText = output['data']['translations'][0]['translatedText'];
-      if (translateFromLanguage.shortLanguage == 'detect') {
-        translateFromLanguage = Language(
-            shortLanguage: output['data']['translations'][0]
-                ['detectedSourceLanguage'],
-            longLanguage: codeToNameFunction(
-                output['data']['translations'][0]['detectedSourceLanguage']));
-      }
-      _translationLoading = false;
-      notifyListeners();
-    } catch (e) {
-      log(e.toString());
-      translateToText = "Error";
-      _translationLoading = false;
-      notifyListeners();
-    }
-    log(translateToText.toString());
+    // try {
+    //   if (translateToLanguage.shortLanguage == "select") {
+    //     translateToText = "Select a Language First";
+    //     _translationLoading = false;
+    //     notifyListeners();
+    //     return;
+    //   }
+    //   final output = await languageRepo.translate(body);
+    //   translateToText = output['data']['translations'][0]['translatedText'];
+    //   if (translateFromLanguage.shortLanguage == 'detect') {
+    //     translateFromLanguage = Language(
+    //         shortLanguage: output['data']['translations'][0]
+    //             ['detectedSourceLanguage'],
+    //         longLanguage: codeToNameFunction(
+    //             output['data']['translations'][0]['detectedSourceLanguage']));
+    //   }
+    //   _translationLoading = false;
+    //   notifyListeners();
+    // } catch (e) {
+    //   log(e.toString());
+    //   translateToText = "Error";
+    //   _translationLoading = false;
+    //   notifyListeners();
+    // }
+    // log(translateToText.toString());
   }
 //
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tgh_task/utils/constants/colors/app_colors.dart';
@@ -23,6 +25,13 @@ class _BottomBuilderState extends State<BottomBuilder> {
   final controller = TextEditingController();
 
   @override
+  void initState() {
+    controller.text =
+        Provider.of<LanguagesNotifier>(context, listen: false).searchText;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -46,6 +55,12 @@ class _BottomBuilderState extends State<BottomBuilder> {
           const SizedBox(height: 10),
           TextField(
             controller: controller,
+            onChanged: (value) {
+              final prov =
+                  Provider.of<LanguagesNotifier>(context, listen: false);
+
+              prov.searchText = value;
+            },
             decoration: InputDecoration(
               border: borderdesign,
               enabledBorder: borderdesign,
@@ -80,10 +95,28 @@ class _BottomBuilderState extends State<BottomBuilder> {
                             : prov.languages!.length - 1,
                     itemBuilder: (context, index) {
                       {
-                        return BottomLanguageItemBuilder(
-                          index: index,
-                          translationFlow: widget.translationFlow,
-                        );
+                        if (widget.translationFlow ==
+                            TranslationFlow.translateFrom) {
+                          if (prov.languages![index].longLanguage
+                              .toLowerCase()
+                              .contains(prov.searchText.toLowerCase())) {
+                            return BottomLanguageItemBuilder(
+                                index: index,
+                                translationFlow: widget.translationFlow);
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        } else {
+                          if (prov.languages![index + 1].longLanguage
+                              .toLowerCase()
+                              .contains(prov.searchText.toLowerCase())) {
+                            return BottomLanguageItemBuilder(
+                                index: index + 1,
+                                translationFlow: widget.translationFlow);
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        }
                       }
                     },
                   ),
