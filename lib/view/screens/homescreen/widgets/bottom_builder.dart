@@ -54,6 +54,7 @@ class _BottomBuilderState extends State<BottomBuilder> {
           ),
           const SizedBox(height: 10),
           TextField(
+            style: AppTypography.roboto(),
             controller: controller,
             onChanged: (value) {
               final prov =
