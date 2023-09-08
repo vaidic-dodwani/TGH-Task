@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tgh_task/utils/constants/colors/app_colors.dart';
+import 'package:tgh_task/utils/constants/translation_flow_controller.dart';
 import 'package:tgh_task/utils/constants/typography_constants.dart';
+import 'package:tgh_task/view/screens/homescreen/widgets/bottom_language_item_builder.dart';
+import 'package:tgh_task/view_model/language_view_model/languages_view_model.dart';
 
 final borderdesign = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20),
     borderSide: const BorderSide(color: Colors.white70));
 
 class BottomBuilder extends StatefulWidget {
-  const BottomBuilder({super.key});
+  const BottomBuilder({super.key, required this.translationFlow});
+
+  final String translationFlow;
+
   @override
   State<BottomBuilder> createState() => _BottomBuilderState();
 }
@@ -59,25 +66,30 @@ class _BottomBuilderState extends State<BottomBuilder> {
                 color: Colors.white70, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 15),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                {
-                  return InkWell(
-                    onTap: () {},
-                    child: SizedBox(
-                      height: 50,
-                      child: Text(
-                        "some language",
-                        textAlign: TextAlign.left,
-                        style: AppTypography.roboto(),
-                      ),
-                    ),
-                  );
-                }
-              },
-            ),
+          Consumer<LanguagesNotifier>(
+            builder: (context, prov, child) {
+              if (prov.languages == null) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                return Expanded(
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount:
+                        widget.translationFlow == TranslationFlow.translateFrom
+                            ? prov.languages!.length
+                            : prov.languages!.length - 1,
+                    itemBuilder: (context, index) {
+                      {
+                        return BottomLanguageItemBuilder(
+                          index: index,
+                          translationFlow: widget.translationFlow,
+                        );
+                      }
+                    },
+                  ),
+                );
+              }
+            },
           ),
         ],
       ),
