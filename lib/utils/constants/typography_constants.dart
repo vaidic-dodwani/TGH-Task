@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 class AppTypography {
-  // static TextStyle tempStyle =
-  //     const TextStyle(fontSize: 25, fontFamily: "Poppins");
+  static TextStyle roboto = GoogleFonts.roboto();
 }

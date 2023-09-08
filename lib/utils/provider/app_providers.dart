@@ -5,6 +5,6 @@ import '../../view_model/temp_view_model/temp_view_model.dart';
 
 class AppProvider {
   static List<SingleChildWidget> providers = [
-    ChangeNotifierProvider(create: (_) => TempNotifier()),
+    ChangeNotifierProvider(create: (_) => LanguagesNotifier()),
   ];
 }

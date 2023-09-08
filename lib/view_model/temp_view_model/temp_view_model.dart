@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-class TempNotifier extends ChangeNotifier {}
+class LanguagesNotifier extends ChangeNotifier {}
