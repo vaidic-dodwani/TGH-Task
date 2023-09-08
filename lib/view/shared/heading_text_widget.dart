@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../utils/constants/typography_constants.dart';
 
 class HeadingTextWidget extends StatelessWidget {
   const HeadingTextWidget({super.key, required this.text});
@@ -10,7 +10,7 @@ class HeadingTextWidget extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         text,
-        style: GoogleFonts.roboto(color: Colors.white),
+        style: AppTypography.roboto(),
       ),
     );
   }

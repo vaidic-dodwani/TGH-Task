@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../../utils/constants/typography_constants.dart';
 
 final borderdesign = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20),
@@ -32,7 +32,7 @@ class _TranslationBoxesState extends State<TranslationBoxes> {
         controller: controller,
         minLines: 7,
         maxLines: 7,
-        style: GoogleFonts.roboto(),
+        style: AppTypography.roboto(),
         decoration: InputDecoration(
           counterText: "",
           border: borderdesign,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:tgh_task/view/screens/homescreen/widgets/bottom_builder.dart';
 import 'package:tgh_task/view/shared/code_to_name_function.dart';
+
+import '../../../../utils/constants/typography_constants.dart';
 
 class CountryButton extends StatelessWidget {
   const CountryButton({super.key});
@@ -12,10 +14,10 @@ class CountryButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
+          backgroundColor: Colors.transparent,
           context: context,
           builder: (context) {
-            return SizedBox.shrink();
-            //TODO add bottom builder here
+            return const BottomBuilder();
           },
         );
       },
@@ -29,7 +31,7 @@ class CountryButton extends StatelessWidget {
         child: Center(
           child: Text(
             codeToNameFunction("en"),
-            style: GoogleFonts.roboto(),
+            style: AppTypography.roboto(),
           ),
         ),
       ),

@@ -45,7 +45,9 @@ class LanguagesNotifier extends ChangeNotifier {
 //
   List<Language>? _languages = [];
   List<Language>? get languages => _languages;
+//
   final languageRepo = LanguageRepository();
+//
   void getLanguages() async {
     _getLanguagesLoading = true;
     notifyListeners();
@@ -78,6 +80,5 @@ class LanguagesNotifier extends ChangeNotifier {
     }
     log(translateToText.toString());
   }
-
 //
 }
